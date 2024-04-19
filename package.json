@@ -1,0 +1,37 @@
+{
+  "name": "classy-toolkit",
+  "version": "1.0.0",
+  "description": "A collection of utilities that integrate with Eventbrite",
+  "type": "module",
+  "engines": {
+    "node": ">= 20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PRX/eventbrite-toolkit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "AGPL-3.0",
+  "private": "true",
+  "bugs": {
+    "url": "https://github.com/PRX/eventbrite-toolkit/issues"
+  },
+  "homepage": "https://github.com/PRX/eventbrite-toolkit#readme",
+  "dependencies": {
+    "@aws-sdk/client-eventbridge": "*"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-import": "*",
+    "eslint-plugin-jest": "*",
+    "eslint-plugin-prettier": "*",
+    "jsdoc": "*",
+    "prettier": "*",
+    "typescript": "*",
+    "yarn": "*"
+  }
+}
