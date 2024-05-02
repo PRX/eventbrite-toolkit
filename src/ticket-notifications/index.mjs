@@ -17,7 +17,7 @@ async function getOrder(orderApiUrl) {
   const resp = await fetch(reqUrl);
   const payload = await resp.json();
 
-  console.log(JSON.stringify({ payload }));
+  console.log(JSON.stringify({ orderPayload: payload }));
   return payload;
 }
 
@@ -26,7 +26,7 @@ async function getEvent(order) {
   const resp = await fetch(reqUrl);
   const payload = await resp.json();
 
-  console.log(JSON.stringify({ payload }));
+  console.log(JSON.stringify({ eventPayload: payload }));
   return payload;
 }
 
