@@ -28,6 +28,10 @@ Resources:
               Effect: Allow
               Resource: !Sub arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:event-bus/default
               Sid: AllowDefaultEventBusPut
+            - Action: lambda:Invoke
+              Effect: Allow
+              Resource: !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:eventbrite-toolkit-TicketNotificationsFunction-*
+              Sid: AllowSelfInvoke
           Version: "2012-10-17"
       Runtime: nodejs20.x
       Tags:
