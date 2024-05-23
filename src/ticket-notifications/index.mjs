@@ -2,6 +2,7 @@ import {
   EventBridgeClient,
   PutEventsCommand,
 } from "@aws-sdk/client-eventbridge";
+import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda";
 
 const SLACK_CHANNEL = "#garage-registration";
 const SLACK_USERNAME = "Eventbrite";
@@ -10,6 +11,7 @@ const SLACK_ICON = ":eventbrite:";
 const TOKEN = `token=${process.env.EVENTBRITE_TOKEN}`;
 
 const eventbridge = new EventBridgeClient({ apiVersion: "2015-10-07" });
+const lambda = new LambdaClient({ apiVersion: "2015-03-31" });
 
 async function getOrder(orderApiUrl) {
   console.info(`Webhook triggered by object ${orderApiUrl}`);
@@ -65,6 +67,25 @@ function message(order, event) {
 }
 
 export const handler = async (event) => {
+  // When handling the webhook, call this function again with the same payload,
+  // plus a flag to indicate the payload has already been received. This allows
+  // for returning a response to the webhook request very quickly (to avoid
+  // timeouts, which seem to be common), and then do the slower part of the
+  // message creation async.
+  if (!event.prx_invoke) {
+    // eslint-disable-next-line no-param-reassign
+    event.prx_invoke = true;
+    await lambda.send(
+      new InvokeCommand({
+        FunctionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
+        InvocationType: "Event",
+        Payload: JSON.stringify(event),
+      }),
+    );
+
+    return { statusCode: 200, headers: {}, body: "" };
+  }
+
   try {
     const body = event.isBase64Encoded
       ? Buffer.from(event.body, "base64").toString("utf-8")
@@ -94,7 +115,7 @@ export const handler = async (event) => {
       }),
     );
 
-    return { statusCode: 200, headers: {}, body: "" };
+    return true;
   } catch (e) {
     console.log(e);
     throw e;

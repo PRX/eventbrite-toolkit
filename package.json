@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/PRX/eventbrite-toolkit#readme",
   "dependencies": {
-    "@aws-sdk/client-eventbridge": "*"
+    "@aws-sdk/client-eventbridge": "*",
+    "@aws-sdk/client-lambda": "*"
   },
   "devDependencies": {
     "@types/node": "*",
