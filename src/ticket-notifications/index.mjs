@@ -2,7 +2,7 @@ import {
   EventBridgeClient,
   PutEventsCommand,
 } from "@aws-sdk/client-eventbridge";
-import { LambdaClient, InvokeCommand } from "@aws-sdk/client-lambda";
+import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
 
 const SLACK_CHANNEL = "#garage-registration";
 const SLACK_USERNAME = "Eventbrite";
@@ -49,7 +49,7 @@ function message(order, event) {
 
   let geo = "";
 
-  if (event.venue && event.venue.address) {
+  if (event.venue?.address) {
     geo = `(${event.venue.address.city}, ${event.venue.address.region})`;
   }
 
