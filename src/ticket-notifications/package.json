@@ -1,0 +1,8 @@
+{
+  "name": "ticket-notifications",
+  "version": "0.0.1",
+  "dependencies": {
+    "@aws-sdk/client-eventbridge": "*",
+    "@aws-sdk/client-lambda": "*"
+  }
+}
