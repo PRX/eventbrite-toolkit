@@ -63,7 +63,7 @@ Resources:
       Handler: index.handler
       MemorySize: 128
       Role: !GetAtt TicketNotificationsRole.Arn
-      Runtime: nodejs22.x
+      Runtime: nodejs24.x
       Tags:
         prx:meta:tagging-version: 2021-04-07
         prx:cloudformation:stack-name: !Ref AWS::StackName
